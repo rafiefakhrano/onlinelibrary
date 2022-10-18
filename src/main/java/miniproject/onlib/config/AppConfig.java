@@ -23,21 +23,12 @@ import miniproject.onlib.service.BookService;
 import miniproject.onlib.service.impl.BookServiceImpl;
 
 @Configuration
-//@PropertySource("classpath:application.properties")
 public class AppConfig {
-	
-//	@Autowired
-//	private Environment env;
 	
 	@Bean
 	public BookService bookService() {
 		return new BookServiceImpl();
 	}
-	
-//	@Bean
-//	public BookRepository bookRepository() {
-//		return new BookRepositoryImpl();
-//	}
 	
 	@Bean
 	public WebMvcConfigurer webMvcConfigurer(ConcurrentTaskExecutor concurrentTaskExecutor) {
@@ -49,6 +40,7 @@ public class AppConfig {
 	        }
 	    };
 	}
+	
 	@Bean
 	public ConcurrentTaskExecutor concurrentTaskExecutor() {
 	    return new ConcurrentTaskExecutor(Executors.newFixedThreadPool(5, new ThreadFactory() {
