@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="1" author="Rafie">
+    <createTable tableName="books">
+           <column name="id" type="long">
+                 <constraints primaryKey="true"/>
+           </column>
+           <column name="name" type="varchar"/>
+           <column name="author" type="varchar"/>
+           <column name="price" type="decimal"/>
+           <column name="publisher" type="varchar"/>
+           <column name="stock" type="numeric"/>
+           <column name="active" type="boolean"/>
+           <column name="owned_date" type="date"/>
+    </createTable>
+    
+        <createTable tableName="books_track">
+           <column name="id" type="long">
+                 <constraints primaryKey="true"/>
+           </column>
+			<column name="reff_id" type = "varchar"/>
+			<column name="book_id" type = "long">
+				<constraints foreignKeyName="fk_book" references="book(id)"/>
+           	</column>
+			<column name="amount" type = "int"/>
+			<column name="customer" type = "varchar"/>
+			<column name="start_date" type = "date"/>
+			<column name="due_date" type = "date"/>
+			<column name="end_date" type = "date"/>
+			<column name="status" type = "varchar"/>
+    </createTable>
+    
+    <insert
+	            	tableName="book">
+	        <column  name="id"  value="${id}"/>
+	        <column  name="name"  value="Book A"/>
+	        <column  name="author"  value="Author A"/>
+	        <column  name="price"  value="10000.00"/>
+	        <column  name="publisher"  value="Publisher A"/>
+	        <column  name="stock"  value="10"/>     
+	        <column  name="active"  value="1"/>         
+    </insert>
+    
+        <insert
+	            	tableName="book B">
+	        <column  name="id"  value="${id}"/>
+	        <column  name="name"  value="Book B"/>
+	        <column  name="author"  value="Author B"/>
+	        <column  name="price"  value="7000.00"/>
+	        <column  name="publisher"  value="Publisher B"/>
+	        <column  name="stock"  value="3"/>     
+	        <column  name="active"  value="1"/>         
+    </insert>
+    
+            <insert
+	            	tableName="book">
+	        <column  name="id"  value="${id}"/>
+	        <column  name="name"  value="Book C"/>
+	        <column  name="author"  value="Author C"/>
+	        <column  name="price"  value="3000.00"/>
+	        <column  name="publisher"  value="Publisher C"/>
+	        <column  name="stock"  value="5"/>     
+	        <column  name="active"  value="0"/>         
+    </insert>
+    
+            <insert
+	            	tableName="book">
+	        <column  name="id"  value="${id}"/>
+	        <column  name="name"  value="Book D"/>
+	        <column  name="author"  value="Author D"/>
+	        <column  name="price"  value="8000.00"/>
+	        <column  name="publisher"  value="Publisher D"/>
+	        <column  name="stock"  value="11"/>     
+	        <column  name="active"  value="1"/>         
+    </insert>
+    
+            <insert
+	            	tableName="book">
+	        <column  name="id"  value="${id}"/>
+	        <column  name="name"  value="Book E"/>
+	        <column  name="author"  value="Author E"/>
+	        <column  name="price"  value="4000.00"/>
+	        <column  name="publisher"  value="Publisher E"/>
+	        <column  name="stock"  value="9"/>     
+	        <column  name="active"  value="1"/>         
+    </insert>
+    </changeSet>
+</databaseChangeLog>
+
