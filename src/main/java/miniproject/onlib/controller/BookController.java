@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,7 @@ import miniproject.onlib.service.BookService;
 
 @RestController
 @RequestMapping("book")
-public class BookServiceController {
+public class BookController {
 
 	@Autowired
 	private BookService bookService;
@@ -40,7 +43,9 @@ public class BookServiceController {
 		Response response = new Response();
 		response.setResponseCode("200");
 		response.setMessage("Success");
-		response.setBody(book.toString());
+		Gson gson = new Gson();
+		String responseBody = gson.toJson(book);
+		response.setBody(responseBody);
 		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 	
@@ -54,7 +59,9 @@ public class BookServiceController {
 		Response response = new Response();
 		response.setResponseCode("200");
 		response.setMessage("Success");
-		response.setBody(book.toString());
+		Gson gson = new Gson();
+		String responseBody = gson.toJson(book);
+		response.setBody(responseBody);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
@@ -77,7 +84,9 @@ public class BookServiceController {
 		Response response = new Response();
 		response.setResponseCode("200");
 		response.setMessage("Success");
-		response.setBody(book.toString());
+		Gson gson = new Gson();
+		String responseBody = gson.toJson(book);
+		response.setBody(responseBody);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
@@ -101,5 +110,23 @@ public class BookServiceController {
 		        
 		    };
 		    return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(responseBody);
+	}
+	
+	
+	@RequestMapping(value = "/filterBooks", method = RequestMethod.POST)
+	public ResponseEntity<Response> getFilterBook(@RequestBody Map<String, String> map) {
+		List<Book> book = new ArrayList<>();
+		try {
+			book = bookService.getBooks(map);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		Response response = new Response();
+		response.setResponseCode("200");
+		response.setMessage("Success");
+		Gson gson = new Gson();
+		String responseBody = gson.toJson(book);
+		response.setBody(responseBody);
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 }
